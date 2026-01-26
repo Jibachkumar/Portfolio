@@ -1,0 +1,102 @@
+@keyframes floatXY {
+  0% {
+    transform: translate(0, 0) rotate(var(--rot));
+  }
+  50% {
+    transform: translate(6px, 100px) rotate(calc(var(--rot) + 20deg));
+  }
+  100% {
+    transform: translate(0, 0) rotate(var(--rot));
+  }
+}
+
+.float-twitter {
+  animation: floatXY 7s ease-in-out infinite;
+}
+
+@keyframes floatYoutube {
+  0% {
+    transform: translate(0, 0) rotate(var(--rot));
+  }
+  50% {
+    transform: translate(50px, 0) rotate(calc(var(--rot) - 30deg));
+  }
+  100% {
+    transform: translate(0, 0) rotate(var(--rot));
+  }
+}
+.float-youtube {
+  animation: floatYoutube 4s ease-in-out infinite;
+}
+
+@keyframes floatGumroad {
+  0% {
+    transform: translate(0, 0) rotate(var(--rot));
+  }
+  50% {
+    transform: translate(40px, 0px) rotate(calc(var(--rot) + 20deg));
+  }
+  100% {
+    transform: translate(0, 0) rotate(var(--rot));
+  }
+}
+.rotate-gumroad {
+  animation: floatGumroad 4s ease-in-out infinite;
+}
+
+@keyframes floatDribbble {
+  0% {
+    transform: translate(0, 0) rotate(var(--rot));
+  }
+  50% {
+    transform: translate(100px, 10px) rotate(calc(var(--rot) + 1deg));
+  }
+  100% {
+    transform: translate(0, 0) rotate(var(--rot));
+  }
+}
+
+.rotate-dribbble {
+  animation: floatDribbble 4s ease-in-out infinite;
+}
+
+@keyframes rotateGithub {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-50px) rotate(25deg) rotateY(-20deg);
+  }
+}
+
+.rotate-github {
+  animation: rotateGithub 4s ease-in-out infinite;
+}
+
+@keyframes bounce-trash {
+  0%,
+  100% {
+    transform: translateY(0) rotate(10deg) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(20px) rotate(45deg) rotateY(60deg);
+  }
+}
+
+.rotate-trash {
+  animation: bounce-trash 4s ease-in-out infinite;
+}
+
+@keyframes bounce-bookmark {
+  0%,
+  100% {
+    transform: translateY(0) rotate(10deg) rotateY(0deg);
+  }
+  50% {
+    transform: translateX(50px) rotate(45deg) rotateY(20deg);
+  }
+}
+.rotate-bookmark {
+  animation: bounce-bookmark 4s ease-in-out infinite;
+}
