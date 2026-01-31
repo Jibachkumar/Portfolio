@@ -69,13 +69,12 @@ export default function ProfilePage() {
               Jibachh Kumar
             </h1>
 
-            <p className="mt-2 text-gray-600">Hello! 👋</p>
+            <p className="mt-2 text-gray-600 font-mono">Hello! 👋</p>
 
-            <p className="mt-4 w-116 font-serif font-medium text-xl text-gray-600 leading-relaxed">
-              I am a UI/UX designer with 3+ years of experience designing user
-              interfaces and user experience, UX Research, redesigning projects,
-              and Usability Testing. I want to stay up-to-date with the latest
-              trends in my field.
+            <p className="mt-4 w-116 font-serif font-medium text-xl text-gray-600 leading-relaxed hyphens-auto break-words">
+              I am a Full Stack Developer with hands-on experience in building frontend and backend applications, 
+              RESTful APIs design, UX research, project redesign, and usability testing, and 
+              I continuously keep myself updated with the latest industry trends.
             </p>
 
             <Link to={"/login"}>
@@ -141,7 +140,7 @@ export default function ProfilePage() {
             <div className="flex flex-col justify-center gap-3">
               <div className="h-16 w-16 rounded-lg bg-gradient-to-tr from-pink-500 to-yellow-500 flex items-center">
                 <img
-                  src="https://www.freeiconspng.com/thumbs/website-icon/website-icon-25.png"
+                  src="https://png.pngtree.com/png-vector/20231031/ourmid/pngtree-transparent-the-globe-blue-color-australia-png-image_10379083.png"
                   alt=""
                   className="w-full h-full object-cover "
                 />
@@ -194,26 +193,31 @@ export default function ProfilePage() {
           </div>
 
           {/* social media */}
-          <div className="rounded-2xl bg-[#ffffff] shadow p-5">
+          <div className="rounded-2xl h-[152px] bg-[#ffffff] shadow p-5">
             <div className="flex items-center justify-between">
               <p className="font-semibold font-mono">Connect with me</p>
-              <button className="rounded-full bg-white px-4 py-1 text-sm shadow">
+              <button className="rounded-full bg-white px-4 py-1 text-sm border border-slate-200 font-serif hover:bg-slate-300">
                 Follow
               </button>
             </div>
 
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              <div  onClick={() => window.open(
+            <div className="flex items-center">
+              <div onClick={() => window.open(
                     "https://www.facebook.com/zadan.smith.58",
                     "_blank",
                   ) 
-                  } className="h-24 rounded-lg bg-gray-300"><img src="" alt="" /></div>
+                  } 
+                  className="h-24 w-24 rounded-lg">
+                  <img src="https://pngimg.com/d/facebook_logos_PNG19753.png" alt="" className="w-full h-full object-cover"/>
+              </div>
               <div onClick={() =>
                   window.open(
                     "https://www.instagram.com/kuwarjeebacha/",
                     "_blank",
                   )
-                } className="h-24 rounded-lg bg-gray-300"><img src="" alt="" /></div>
+                } className="w-20 h-[67px] rounded-lg">
+                <img src="https://1000logos.net/wp-content/uploads/2017/02/Instagram-Logo.png" alt="" className="w-full h-full object-cover"/>
+              </div>
             </div>
           </div>
         </div>
