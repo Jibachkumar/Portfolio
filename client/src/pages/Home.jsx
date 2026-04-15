@@ -16,11 +16,9 @@ import {
   Circle,
   Github,
   Gitlab,
-  Ship, 
-  Plane, 
-  Search, 
-  Map, 
-  TrendingUp
+  Ship,
+  Plane,
+  Search,
 } from "lucide-react";
 import { useInView } from "../hooks/useInView.js";
 
@@ -64,8 +62,8 @@ export default function Home() {
             done
               ? "text-slate-400"
               : active
-              ? "text-slate-800 font-medium"
-              : "text-slate-600"
+                ? "text-slate-800 font-medium"
+                : "text-slate-600"
           }`}
         >
           {label}
@@ -310,16 +308,16 @@ export default function Home() {
       </div>
 
       {/* my work */}
-      <div className="w-full bg-[#f8f8f8] mt-5 py-10">
+      <div className="w-full bg-[#fcfcfc] mt-5 py-10">
         <div className="max-w-7xl mx-auto px-6">
           {/* Title */}
-          <h2 className="text-5xl font-bold font-serif text-stone-800 leading-tight pb-4  border-b border-slate-400 text-center">
+          <h2 className="text-6xl font-bold font-serif text-emerald-900/80 leading-tight pb-4 text-center">
             My Work
           </h2>
 
           {/* Main Layout */}
           {/* first section */}
-          <div className="mt-20  grid grid-cols-1 lg:grid-cols-2 gap-14">
+          <div className="mt-16  grid grid-cols-1 lg:grid-cols-2 gap-14">
             {/* LEFT : Website Mockup Image */}
             <div
               ref={firstSection.ref}
@@ -374,9 +372,8 @@ export default function Home() {
                       </h1>
 
                       <p className="mt-1 text-white/90 font-serif max-w-sm mx-auto text-[10px]">
-                        We create, real-time data across your
-                        logistics so you know where your shipments are and what
-                        to do next.
+                        We create, real-time data across your logistics so you
+                        know where your shipments are and what to do next.
                       </p>
 
                       <div className="mt-4 font-serif flex items-center justify-center gap-4">
@@ -393,35 +390,53 @@ export default function Home() {
                   {/* Dashboard preview */}
                   <div className="bg-white w-lg mx-auto h-[137px] rounded-t-2xl px-6 pt-3 ">
                     {/* Header */}
-                      <div className="flex items-center justify-between">
-                        <div className="font-serif">
-                          <h1 className="text-sm font-semibold">Track</h1>
-                          <p className="text-[10px] text-slate-500">Events shown in local time</p>
-                        </div>
-                        <div className="relative border border-slate-100 rounded-full">
-                          <div className="pl-4 py-1 w-[300px] flex items-center gap-3">
-                            <Search className="w-3 h-3 text-slate-400" />
-                            <input
+                    <div className="flex items-center justify-between">
+                      <div className="font-serif">
+                        <h1 className="text-sm font-semibold">Track</h1>
+                        <p className="text-[10px] text-slate-500">
+                          Events shown in local time
+                        </p>
+                      </div>
+                      <div className="relative border border-slate-100 rounded-full">
+                        <div className="pl-4 py-1 w-[300px] flex items-center gap-3">
+                          <Search className="w-3 h-3 text-slate-400" />
+                          <input
                             placeholder="search"
                             className="border-0 focus-visible:ring-0 text-sm"
-                            />
-                            <button className="bg-orange-500 text-white text-[10px] font-serif rounded-r-full absolute py-[7px] px-2 right-0">Search</button>
-                          </div>
+                          />
+                          <button className="bg-orange-500 text-white text-[10px] font-serif rounded-r-full absolute py-[7px] px-2 right-0">
+                            Search
+                          </button>
                         </div>
                       </div>
+                    </div>
 
                     <div className="mt-5 grid md:grid-cols-2 gap-2 text-xs text-gray-600">
-                        <div className="rounded-md font-serif h-10 border border-slate-200 flex flex-row items-center justify-between px-1">   
-                          <Ship className="w-4 h-4 text-slate-400" />
-                          <h2 className="text-[11px] font-medium text-slate-500">Ocean shipments tracked </h2>
-                          <button variant="link" className="text-[10px] text-blue-700 font-semibold">View all</button> 
-                        </div>
+                      <div className="rounded-md font-serif h-10 border border-slate-200 flex flex-row items-center justify-between px-1">
+                        <Ship className="w-4 h-4 text-slate-400" />
+                        <h2 className="text-[11px] font-medium text-slate-500">
+                          Ocean shipments tracked{" "}
+                        </h2>
+                        <button
+                          variant="link"
+                          className="text-[10px] text-blue-700 font-semibold"
+                        >
+                          View all
+                        </button>
+                      </div>
 
-                        <div className="rounded-md font-serif h-10 border border-slate-200 flex flex-row items-center justify-between px-1">   
-                          <Plane className="w-4 h-4 text-slate-400" />
-                          <h2 className="text-[11px] font-medium text-slate-500">Air shipments tracked </h2>
-                          <button variant="link" className="text-[10px] text-blue-700 font-semibold">View all</button> 
-                        </div>
+                      <div className="rounded-md font-serif h-10 border border-slate-200 flex flex-row items-center justify-between px-1">
+                        <Plane className="w-4 h-4 text-slate-400" />
+                        <h2 className="text-[11px] font-medium text-slate-500">
+                          Air shipments tracked{" "}
+                        </h2>
+                        <button
+                          variant="link"
+                          className="text-[10px] text-blue-700 font-semibold"
+                        >
+                          View all
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -442,7 +457,7 @@ export default function Home() {
                 EXP Website
               </h3>
 
-              <p className="text-stone-950 w-[590px] font-serif font-medium leading-relaxed ">
+              <p className="text-slate-600 w-[590px] font-serif font-medium leading-relaxed ">
                 Partnering with Future Brand , we developed a sophisticated
                 website for SCI Ventures, integrating custom JavaScript and GSAP
                 for smooth animations and a unique pre-loader for first-time
@@ -568,10 +583,12 @@ export default function Home() {
                   <div className="flex px-5 mt-5 font-serif text-sm font-medium">
                     <div>
                       <h2>
-                        Connect with <span className="font-mono">genAI</span>{" "}
+                        Connect with{" "}
+                        <span className="font-mono">genAI</span>{" "}
                       </h2>
                       <p>
-                        create your product <span className=""> chatbot</span>{" "}
+                        create your product{" "}
+                        <span className=""> chatbot</span>{" "}
                       </p>
                       <p className="text-[8px]">
                         An AI-powered chatbot built for Messenger <br /> and
@@ -614,7 +631,7 @@ export default function Home() {
                 GenAI Chatbot
               </h3>
 
-              <p className="text-stone-950 w-[590px] font-serif font-medium leading-relaxed ">
+              <p className="text-slate-600 w-[590px] font-serif font-medium leading-relaxed ">
                 We developed Link sophisticated website, integrating custom
                 JavaScript and an AI-powered generative RAG chatbot built using
                 a LangChain agent. Despite tight deadlines, we delivered a

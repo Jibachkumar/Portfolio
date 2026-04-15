@@ -100,3 +100,18 @@
 .rotate-bookmark {
   animation: bounce-bookmark 4s ease-in-out infinite;
 }
+
+/* Make sure page can scroll */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar everywhere */
+html {
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}

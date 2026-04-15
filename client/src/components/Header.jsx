@@ -39,7 +39,7 @@ function Header() {
         transition-all duration-300 z-50
         ${
           scrolled
-            ? "fixed top-0 bg-pink-50 backdrop-blur-md shadow-sm"
+            ? "fixed top-0 bg-[#fcfcfc] backdrop-blur-md shadow-sm"
             : "absolute top-0 bg-transparent"
         }`}
     >
