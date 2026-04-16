@@ -4,6 +4,7 @@ export function useInView() {
   const ref = useRef(null);
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(false);
+  const [showObserver, setShowObserver] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -18,6 +19,10 @@ export function useInView() {
           setShowRight(true);
           observer.disconnect(); // stop observing
         }
+
+        if (r >= 0.1 && !showObserver) {
+          setShowObserver(true);
+        }
       },
       { threshold: [0.1, 0.2] },
     );
@@ -27,7 +32,7 @@ export function useInView() {
     return () => observer.disconnect();
   }, [showLeft, showRight]);
 
-  return { ref, showLeft, showRight };
+  return { ref, showLeft, showRight, showObserver };
 }
 
 // function useInViewThreshold(threshold = 0.8) {

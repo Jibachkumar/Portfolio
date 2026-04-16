@@ -23,9 +23,56 @@ import {
 } from "lucide-react";
 import { useInView } from "../hooks/useInView.js";
 
+import { useMotionValue, useTransform } from "framer-motion";
+
+function TiltCard({ children }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // rotate based on mouse
+  const rotateX = useTransform(y, [-100, 100], [15, -15]);
+  const rotateY = useTransform(x, [-100, 100], [-15, 15]);
+
+  function handleMouseMove(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    x.set(mouseX - centerX);
+    y.set(mouseY - centerY);
+  }
+
+  function handleMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <motion.div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformPerspective: 1000,
+      }}
+      className="relative"
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export default function Home() {
   const firstSection = useInView();
   const secondSection = useInView();
+  const headingObserver = useInView();
+  const secondHeadingObserver = useInView();
+  const thirdHeadingObserver = useInView();
 
   const techs = [
     "React",
@@ -330,10 +377,17 @@ export default function Home() {
       </div>
 
       {/* my work */}
-      <div className="w-full bg-[#faf9f7] mt-5 py-10">
+      <div className="w-full mt-5 pt-10 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           {/* Title */}
-          <h2 className="text-6xl font-bold font-serif text-[#0b5d4b] leading-tight pb-4 text-center">
+          <h2
+            ref={headingObserver.ref}
+            className={`text-6xl font-bold font-serif text-[#0b5d4b] leading-tight pb-4 text-center transform transition-all duration-700 ease-out  ${
+              headingObserver.showObserver
+                ? "opacity-100 translate-y-0 "
+                : "opacity-0 translate-y-20"
+            }`}
+          >
             My Work
           </h2>
 
@@ -343,7 +397,7 @@ export default function Home() {
             {/* LEFT : Website Mockup Image */}
             <div
               ref={firstSection.ref}
-              className={`relative transition-all duration-900 ease-out
+              className={`relative -top-12 transition-all duration-900 ease-out
                         ${
                           firstSection.showLeft
                             ? "opacity-100 translate-y-0"
@@ -351,7 +405,7 @@ export default function Home() {
                         }
                       `}
             >
-              <div className="rounded-[32px] w-[500px] h-[376px] bg-gradient-to-br from-slate-200 via-slate-700 to-slate-800 p-4 shadow-2xl">
+              <div className="rounded-[32px] w-[500px] h-[376px] bg-gradient-to-br from-slate-200 via-slate-700 to-slate-800 p-4">
                 <div className="bg-[#0f2233]  rounded-md overflow-hidden">
                   {/* Browser Bar */}
                   <div className="h-12 bg-[#0f2233] text-white/90 font-serif flex flex justify-between items-center px-4 gap-2">
@@ -467,11 +521,11 @@ export default function Home() {
 
             {/* RIGHT : Project Description */}
             <div
-              className={`space-y-6 transition-all duration-900 ease-out delay-200
+              className={`space-y-6 transition-all duration-900 ease-out delay-700
                 ${
                   firstSection.showRight
                     ? "opacity-100 translate-x-0"
-                    : "opacity-0 translate-y-20"
+                    : "opacity-0 translate-x-96"
                 }
               `}
             >
@@ -507,11 +561,11 @@ export default function Home() {
           <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-14 px-20">
             {/* LEFT : Website Mockup Image */}
             <div
-              className={`relative space-y-6 transition-all duration-900 ease-out delay-200
+              className={`relative -top-10 space-y-6 transition-all duration-900 ease-out delay-200
                 ${
                   secondSection.showRight
                     ? "opacity-100 translate-x-0"
-                    : "opacity-0 translate-y-20"
+                    : "opacity-0 -translate-x-96"
                 }
               `}
             >
@@ -545,7 +599,7 @@ export default function Home() {
             {/* RIGHT : Project Description */}
             <div
               ref={secondSection.ref}
-              className={`relative -top-28 transition-all duration-900 ease-out
+              className={`relative -top-36 transition-all duration-900 ease-out
                         ${
                           secondSection.showLeft
                             ? "opacity-100 translate-y-0"
@@ -553,7 +607,7 @@ export default function Home() {
                         }
                       `}
             >
-              <div className="rounded-[32px] w-[500px] h-[376px] bg-gradient-to-br from-[#332D56] via-[#332D56] to-[#332D56] pt-6 pl-2 shadow-2xl">
+              <div className="rounded-[32px] w-[500px] h-[376px] bg-gradient-to-br from-[#332D56] via-[#332D56] to-[#332D56] pt-6 pl-2">
                 {/* bottom section */}
                 <div className="bg-[#061E29] w-sm h-[17rem] rounded-sm">
                   {/* Browser Bar */}
@@ -666,8 +720,15 @@ export default function Home() {
       </div>
 
       {/* Design and development process */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-5xl font-bold font-serif text-[#0b5d4b] leading-tight pb-4 text-center">
+      <div className="max-w-7xl mx-auto px-6 pb-16">
+        <h2
+          ref={secondHeadingObserver.ref}
+          className={`text-5xl font-bold font-serif text-[#0b5d4b] leading-tight pb-4 text-center transform transition-all duration-700 ease-out  ${
+            secondHeadingObserver.showObserver
+              ? "opacity-100 translate-y-0 "
+              : "opacity-0 translate-y-20"
+          }`}
+        >
           Design and Development solutions
         </h2>
         {/* development solution section */}
@@ -709,11 +770,23 @@ export default function Home() {
         {/* development process section */}
         <div className="mt-28 grid grid-cols-1 lg:grid-cols-2 gap-20">
           {/* LEFT SIDE */}
-          <div className="relative">
-            <h2 className="text-5xl font-bold font-serif text-[#0b5d4b] leading-tight">
-              MY PROCESS, FROM CONCEPT TO LAUNCH
-            </h2>
-          </div>
+          <TiltCard>
+            <div className="relative backdrop-blur-xl">
+              {/* your 3D background */}
+              <div className="absolute -top-20 -left-20 w-72 h-72 bg-emerald-300 rounded-full blur-[120px] opacity-40"></div>
+
+              <h2
+                ref={thirdHeadingObserver.ref}
+                className={`relative text-5xl font-bold font-serif text-[#0b5d4b] leading-tight transform transition-all duration-700 ease-out ${
+                  thirdHeadingObserver.showObserver
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-20"
+                }`}
+              >
+                MY PROCESS, FROM CONCEPT TO LAUNCH
+              </h2>
+            </div>
+          </TiltCard>
 
           {/* RIGHT SIDE */}
           <div className="space-y-12 font-serif border-l border-gray-200 pl-10">
