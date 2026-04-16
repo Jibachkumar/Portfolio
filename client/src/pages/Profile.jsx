@@ -2,6 +2,7 @@ import TourWebsite from "../../public/exploreNepal.png";
 import BikeManagementSystem from "../../public/bikeManagementSystem.png";
 import BandingPage from "../../public/landing.png";
 import Portfolio from "../../public/portfolio.png";
+import profileImg from "../../public/jkd.jpg";
 import { useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -54,27 +55,30 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 px-28 py-10">
+    <div className="min-h-screen bg-white px-28 py-10">
       <div className="mx-auto grid grid-cols-1 lg:grid-cols-3 gap-68">
         {/* LEFT PROFILE SECTION */}
         <div className="lg:col-span-1">
           <div className="flex flex-col items-start">
             <img
-              src="https://gratisography.com/wp-content/uploads/2025/05/gratisography-moon-robot-800x525.jpg"
+              src={profileImg}
               alt="Profile"
-              className="h-44 w-44 rounded-full object-cover"
+              className="h-44 w-44 rounded-full object-cover fade-in-out"
             />
 
-            <h1 className="mt-6 text-3xl font-serif font-bold text-gray-900">
+            <h1 className="mt-6 text-3xl font-serif font-bold text-gray-900 fade-in-out">
               Jibachh Kumar
             </h1>
 
-            <p className="mt-2 text-gray-600 font-mono">Hello! 👋</p>
+            <p className="mt-2 text-gray-600 font-mono fade-in-out">
+              Hello! 👋
+            </p>
 
-            <p className="mt-4 w-116 font-serif font-medium text-xl text-gray-600 leading-relaxed hyphens-auto break-words">
-              I am a Full Stack Developer with hands-on experience in building frontend and backend applications, 
-              RESTful APIs design, UX research, project redesign, and usability testing, and 
-              I continuously keep myself updated with the latest industry trends.
+            <p className="mt-4 w-116 font-serif font-medium text-xl text-gray-600 leading-relaxed hyphens-auto wrap-break-word fade-in-out">
+              I am a Full Stack Developer with hands-on experience in building
+              frontend and backend applications, RESTful APIs design, UX
+              research, project redesign, and usability testing, and I
+              continuously keep myself updated with the latest industry trends.
             </p>
 
             <Link to={"/login"}>
@@ -93,13 +97,14 @@ export default function ProfilePage() {
         {/* RIGHT CONTENT SECTION */}
         <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* MAP CARD */}
-          <div className="rounded-2xl overflow-hidden bg-white shadow">
-            <Map mapId={`map`} />
+          <div className="relative group rounded-2xl bg-white overflow-hidden p-[1px] shadow-[0_1px_3px_rgba(0,0,0,0.4)] ">
+            {/* Map */}
+            <Map mapId="map" />
           </div>
 
           <div className="flex flex-col gap-y-10">
             {/* LINKEDIN CARD */}
-            <div className="rounded-2xl bg-[#e4e3e3] shadow p-5 flex items-center justify-center gap-14">
+            <div className="rounded-2xl bg-gradient-to-r from-[#ffffff] via-[#272424] to-[#ffffff] shadow p-5 flex items-center justify-center gap-14">
               <div
                 className="font-serif cursor-pointer"
                 onClick={() =>
@@ -114,10 +119,10 @@ export default function ProfilePage() {
                 </div>
                 <div>
                   <p className="font-medium ">Let’s Connect</p>
-                  <p className="text-sm text-gray-500">linkedin.com</p>
+                  <p className="text-sm text-green-900">linkedin.com</p>
                 </div>
               </div>
-              <div className="bg-[#454749] h-32 w-40 rounded-md flex items-center">
+              <div className="h-32 w-40 rounded-md flex items-center">
                 <img
                   src="https://static.vecteezy.com/system/resources/thumbnails/036/418/387/small/boy-facial-expression-png.png"
                   alt="Profile"
@@ -127,8 +132,8 @@ export default function ProfilePage() {
             </div>
 
             {/* QUOTE CARD */}
-            <div className="rounded-2xl text-center bg-white shadow py-12 md:col-span-2">
-              <p className="text-xl font-medium font-serif text-gray-800">
+            <div className="rounded-2xl text-center  bg-gradient-to-r from-[#ceccc9] via-[#ebe8e6] to-[#e9e9e9] shadow py-12 md:col-span-2">
+              <p className="text-xl font-medium font-serif text-gray-800 text-shadow-golden">
                 Crafting visuals with purpose, <br />
                 designing experiences with heart 🔥
               </p>
@@ -136,7 +141,7 @@ export default function ProfilePage() {
           </div>
 
           {/* website CARD */}
-          <div className="rounded-2xl flex gap-6 bg-white shadow p-5">
+          <div className="rounded-2xl flex gap-6 bg-[#F5F2F2] shadow p-5">
             <div className="flex flex-col justify-center gap-3">
               <div className="h-16 w-16 rounded-lg bg-gradient-to-tr from-pink-500 to-yellow-500 flex items-center">
                 <img
@@ -146,10 +151,7 @@ export default function ProfilePage() {
                 />
               </div>
               <p className="font-medium font-serif">My Websites</p>
-              <button
-                
-                className="mt-2 rounded-lg w-28 bg-blue-800 px-2 py-2 text-sm text-white font-medium font-serif cursor-pointer transition duration-200 ease-in-out hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5"
-              >
+              <button className="mt-2 rounded-lg w-28 bg-blue-800 px-2 py-2 text-sm text-white font-medium font-serif cursor-pointer transition duration-200 ease-in-out hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5">
                 Follow me
               </button>
             </div>
@@ -193,7 +195,7 @@ export default function ProfilePage() {
           </div>
 
           {/* social media */}
-          <div className="rounded-2xl h-[152px] bg-[#ffffff] shadow p-5">
+          <div className="rounded-2xl h-[152px] bg-[#F5F2F2] shadow p-5">
             <div className="flex items-center justify-between">
               <p className="font-semibold font-mono">Connect with me</p>
               <button className="rounded-full bg-white px-4 py-1 text-sm border border-slate-200 font-serif hover:bg-slate-300">
@@ -202,21 +204,36 @@ export default function ProfilePage() {
             </div>
 
             <div className="flex items-center">
-              <div onClick={() => window.open(
+              <div
+                onClick={() =>
+                  window.open(
                     "https://www.facebook.com/zadan.smith.58",
                     "_blank",
-                  ) 
-                  } 
-                  className="h-24 w-24 rounded-lg">
-                  <img src="https://pngimg.com/d/facebook_logos_PNG19753.png" alt="" className="w-full h-full object-cover"/>
+                  )
+                }
+                className="h-24 w-24 rounded-lg trash perspective cursor-pointer"
+              >
+                <img
+                  src="https://pngimg.com/d/facebook_logos_PNG19753.png"
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <div onClick={() =>
+              <div
+                onClick={() =>
                   window.open(
                     "https://www.instagram.com/kuwarjeebacha/",
                     "_blank",
                   )
-                } className="w-20 h-[67px] rounded-lg">
-                <img src="https://1000logos.net/wp-content/uploads/2017/02/Instagram-Logo.png" alt="" className="w-full h-full object-cover"/>
+                }
+                className="w-20 h-[67px] rounded-lg float-youtube cursor-pointer"
+                style={{ "--rot": "0deg", animationDelay: "0.4s" }}
+              >
+                <img
+                  src="https://1000logos.net/wp-content/uploads/2017/02/Instagram-Logo.png"
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>

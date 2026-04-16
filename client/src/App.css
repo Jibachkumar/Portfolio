@@ -15,18 +15,21 @@
 }
 
 @keyframes floatYoutube {
-  0% {
+  0%,
+  100% {
     transform: translate(0, 0) rotate(var(--rot));
   }
   50% {
-    transform: translate(50px, 0) rotate(calc(var(--rot) - 30deg));
-  }
-  100% {
-    transform: translate(0, 0) rotate(var(--rot));
+    transform: translate(10px, 0) rotate(calc(var(--rot) - 30deg));
   }
 }
 .float-youtube {
   animation: floatYoutube 4s ease-in-out infinite;
+}
+
+.float-youtube:hover {
+  animation: none;
+  transform: translateX(0) rotateY(0deg);
 }
 
 @keyframes floatGumroad {
@@ -77,15 +80,25 @@
 @keyframes bounce-trash {
   0%,
   100% {
-    transform: translateY(0) rotate(10deg) rotateY(0deg);
+    transform: translateY(0) rotateY(0deg);
   }
   50% {
-    transform: translateY(20px) rotate(45deg) rotateY(60deg);
+    transform: translateY(0) rotateY(180deg);
   }
 }
 
+.trash {
+  animation: bounce-trash 8s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.trash:hover {
+  animation: none;
+  transform: translateX(0) rotateY(0deg);
+}
+
 .rotate-trash {
-  animation: bounce-trash 4s ease-in-out infinite;
+  animation: bounce-trash 5s ease-in-out infinite;
 }
 
 @keyframes bounce-bookmark {
@@ -114,4 +127,36 @@ html {
 
 html::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
+}
+
+.text-shadow-golden {
+  text-shadow:
+    0px 2px 3px rgba(0, 0, 0, 0.8),
+    0px 0px 6px rgba(10, 8, 3, 0.4);
+}
+
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in-out {
+  animation: fadeInOut 3s ease-in-out forwards;
+}
+
+@keyframes spin {
+  from {
+    translate: 0;
+  }
+  to {
+    translate: -100%;
+  }
+}
+
+.spin-in-out {
+  animation: spin 5s infinite linear;
 }

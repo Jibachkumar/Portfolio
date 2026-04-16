@@ -1,3 +1,4 @@
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AnimatedText from "../components/AminatedText";
 import { motion } from "framer-motion";
@@ -26,24 +27,43 @@ export default function Home() {
   const firstSection = useInView();
   const secondSection = useInView();
 
+  const techs = [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "GenAI",
+    "Botpress",
+    "Socket.io",
+    "MongoDB",
+    "PostgreSQL",
+  ];
+
   const buttonContainer = {
     hidden: {},
     visible: {
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 4.8, // 👈 starts after paragraph
+        delayChildren: 4, // 👈 starts after paragraph
       },
     },
   };
 
   const buttonItem = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
+    visible: (i) => ({
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
-    },
+    }),
   };
+
+  const ref = useRef(null);
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    if (ref.current) {
+      setWidth(ref.current.scrollWidth / 2); // exact width of ONE set
+    }
+  }, []);
 
   function ChecklistRow({ label, done, active }) {
     return (
@@ -88,16 +108,6 @@ export default function Home() {
       <div className="absolute right-80 bottom-32 w-72 h-72 bg-rose-50 rounded-full blur-[130px] opacity-60" />
       {/* CENTER CONTENT */}
       <div className="relative w-full  z-10 flex flex-col items-center justify-center  text-center">
-        {/* DOT GRID BACKGROUND */}
-        {/* <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px)",
-            backgroundSize: "20px 20px",
-          }}
-        /> */}
-
         {/* CONTENT */}
         <div className="w-full text-center px-6 max-w-5xl">
           {/* MAIN HEADING */}
@@ -131,22 +141,36 @@ export default function Home() {
           variants={buttonContainer}
           initial="hidden"
           animate="visible"
-          className="flex gap-3"
+          className="w-full overflow-hidden max-w-5xl"
         >
-          {["React", "Node.js", "GenAI", "Botpress"].map((tech) => (
-            <motion.button
-              key={tech}
-              variants={buttonItem}
-              className="mt-6 flex items-center gap-2 rounded-md font-serif text-green-800 border border-gray-800 px-6 py-2 text-sm hover:bg-black hover:text-white transition"
-            >
-              {tech}
-            </motion.button>
-          ))}
+          <motion.div
+            ref={ref}
+            className="flex gap-3"
+            animate={{ x: -width }}
+            transition={{
+              ease: "linear",
+              duration: 20,
+              repeat: Infinity,
+              repeatType: "loop",
+            }}
+            style={{ willChange: "transform" }}
+          >
+            {[...techs, ...techs].map((tech, i) => (
+              <motion.button
+                key={`${tech}-${i}`}
+                custom={i}
+                variants={buttonItem}
+                className="mt-6 flex items-center gap-2 rounded-md font-serif text-green-800 px-6 py-2 text-sm hover:text-white transition whitespace-nowrap"
+              >
+                {tech}
+              </motion.button>
+            ))}
+          </motion.div>
         </motion.div>
       </div>
 
       {/* case study  */}
-      <div>
+      <div className="mb-28">
         {/* first section */}
         <div className="w-full pt-28 flex flex-col items-center text-center">
           {/* Badge */}
@@ -167,7 +191,7 @@ export default function Home() {
         </div>
 
         {/* second section */}
-        <div className="mt-14 font-serif relative mx-auto w-[960px] h-[520px] rounded-3xl overflow-hidden shadow-md bg-[#faf9f7]">
+        <div className="mt-14 font-serif relative mx-auto w-[960px] h-[520px] rounded-3xl overflow-hidden bg-[#faf9f7]">
           {/* Left content */}
           <div className="absolute inset-y-0 -left-6  p-14 flex flex-col justify-center">
             <div className="space-x-6">
@@ -176,16 +200,16 @@ export default function Home() {
               </span>
             </div>
 
-            <h1 className="text-4xl font-semibold text-green-950 italic leading-tight mb-6">
+            <h1 className="text-4xl font-semibold text-[#0b5d4b] italic leading-tight mb-6">
               Redesigning onboarding
             </h1>
 
-            <p className="text-stone-800 text-lg max-w-md mb-10">
+            <p className="text-stone-600 text-lg max-w-md mb-10">
               An onboarding redesign that increased activation <br /> rate by{" "}
               <strong>19%</strong> and sign‑up rate by <strong>41%</strong>
             </p>
 
-            <button className="group flex items-center gap-2 text-stone-950 font-semibold font-mono text-lg">
+            <button className="group flex items-center gap-2 text-stone-800 font-semibold font-mono text-lg">
               READ CASE STUDY
               <span className="group-hover:translate-x-1 transition-transform">
                 →
@@ -194,9 +218,9 @@ export default function Home() {
           </div>
 
           {/* Right mock UI */}
-          <div className="absolute inset-y-0 right-0 w-[45%] rounded-l-3xl shadow-inner">
+          <div className="absolute inset-y-0 right-0 w-[45%] overflow-hidden">
             {/* main product UI */}
-            <div className="relative w-full h-full bg-white rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-slate-200 grid grid-cols-[70px_1fr] overflow-hidden">
+            <div className="relative w-full h-full bg-white rounded-3xl border border-slate-200 grid grid-cols-[70px_1fr] overflow-hidden">
               {/* Sidebar */}
               <div className="bg-slate-50 border-r border-slate-200 flex flex-col items-center py-4 gap-6">
                 <PanelLeft className="w-5 h-5 text-slate-400" />
@@ -303,21 +327,19 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* third section */}
       </div>
 
       {/* my work */}
-      <div className="w-full bg-[#fcfcfc] mt-5 py-10">
+      <div className="w-full bg-[#faf9f7] mt-5 py-10">
         <div className="max-w-7xl mx-auto px-6">
           {/* Title */}
-          <h2 className="text-6xl font-bold font-serif text-emerald-900/80 leading-tight pb-4 text-center">
+          <h2 className="text-6xl font-bold font-serif text-[#0b5d4b] leading-tight pb-4 text-center">
             My Work
           </h2>
 
           {/* Main Layout */}
           {/* first section */}
-          <div className="mt-16  grid grid-cols-1 lg:grid-cols-2 gap-14">
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-14 px-20">
             {/* LEFT : Website Mockup Image */}
             <div
               ref={firstSection.ref}
@@ -329,7 +351,7 @@ export default function Home() {
                         }
                       `}
             >
-              <div className="rounded-[32px] w-xl h-[376px] bg-gradient-to-br from-slate-200 via-slate-700 to-slate-800 p-4 shadow-2xl">
+              <div className="rounded-[32px] w-[500px] h-[376px] bg-gradient-to-br from-slate-200 via-slate-700 to-slate-800 p-4 shadow-2xl">
                 <div className="bg-[#0f2233]  rounded-md overflow-hidden">
                   {/* Browser Bar */}
                   <div className="h-12 bg-[#0f2233] text-white/90 font-serif flex flex justify-between items-center px-4 gap-2">
@@ -388,7 +410,7 @@ export default function Home() {
                   </div>
 
                   {/* Dashboard preview */}
-                  <div className="bg-white w-lg mx-auto h-[137px] rounded-t-2xl px-6 pt-3 ">
+                  <div className="bg-white mx-auto h-[137px] rounded-t-2xl px-6 pt-3 ">
                     {/* Header */}
                     <div className="flex items-center justify-between">
                       <div className="font-serif">
@@ -453,11 +475,7 @@ export default function Home() {
                 }
               `}
             >
-              <h3 className="text-3xl font-semibold text-stone-800 leading-tight font-serif">
-                EXP Website
-              </h3>
-
-              <p className="text-slate-600 w-[590px] font-serif font-medium leading-relaxed ">
+              <p className="text-slate-600 w-[500px] font-serif font-medium text-justify leading-relaxed">
                 Partnering with Future Brand , we developed a sophisticated
                 website for SCI Ventures, integrating custom JavaScript and GSAP
                 for smooth animations and a unique pre-loader for first-time
@@ -466,15 +484,8 @@ export default function Home() {
                 our technical prowess and timely execution.
               </p>
 
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 font-semibold font-mono text-gray-950 hover:underline"
-              >
-                VISIT WEBSITE <span>↗</span>
-              </a>
-
               {/* Tags */}
-              <div className="flex flex-wrap font-serif gap-3 pt-4 ">
+              <div className="flex flex-wrap font-serif gap-3 ">
                 {[
                   "Attributes",
                   "Client-First",
@@ -484,7 +495,7 @@ export default function Home() {
                 ].map((tag) => (
                   <span
                     key={tag}
-                    className="px-4 py-1.5 rounded-full bg-white border text-sm text-gray-800 shadow-sm hover:bg-gray-950 hover:text-white"
+                    className="px-3 py-1.5 rounded-md bg-white border border-slate-200 text-xs text-gray-700 cursor-pointer"
                   >
                     {tag}
                   </span>
@@ -493,14 +504,48 @@ export default function Home() {
             </div>
           </div>
 
-          {/* second section */}
-          <div className="w-full mt-12 border-b border-slate-400"> </div>
-
-          <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-14">
+          <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-14 px-20">
             {/* LEFT : Website Mockup Image */}
             <div
+              className={`relative space-y-6 transition-all duration-900 ease-out delay-200
+                ${
+                  secondSection.showRight
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 translate-y-20"
+                }
+              `}
+            >
+              <p className="text-slate-600 w-[500px] font-serif font-medium text-justify leading-relaxed ">
+                We developed Link sophisticated website, integrating custom
+                JavaScript and an AI-powered generative RAG chatbot built using
+                a LangChain agent. Despite tight deadlines, we delivered a
+                seamless, high-performance experience, demonstrating strong
+                technical expertise and efficient execution.
+              </p>
+
+              {/* Tags */}
+              <div className="flex flex-wrap font-serif gap-x-3 gap-y-1">
+                {[
+                  "Attributes",
+                  "Client-First",
+                  "Figma to Webflow",
+                  "Webflow development",
+                  "GSAP Animations",
+                ].map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1.5 rounded-md bg-white border border-slate-200 text-xs text-gray-700 cursor-pointer"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT : Project Description */}
+            <div
               ref={secondSection.ref}
-              className={`relative transition-all duration-900 ease-out
+              className={`relative -top-28 transition-all duration-900 ease-out
                         ${
                           secondSection.showLeft
                             ? "opacity-100 translate-y-0"
@@ -508,9 +553,9 @@ export default function Home() {
                         }
                       `}
             >
-              <div className="rounded-[32px] w-xl h-[376px] bg-gradient-to-br from-[#332D56] via-[#332D56] to-[#332D56] p-6 shadow-2xl">
+              <div className="rounded-[32px] w-[500px] h-[376px] bg-gradient-to-br from-[#332D56] via-[#332D56] to-[#332D56] pt-6 pl-2 shadow-2xl">
                 {/* bottom section */}
-                <div className="bg-[#061E29] ml-2 w-sm h-[17rem] rounded-sm">
+                <div className="bg-[#061E29] w-sm h-[17rem] rounded-sm">
                   {/* Browser Bar */}
                   <div className="h-12 flex items-center px-4 gap-2">
                     {/* Top Navigation */}
@@ -553,7 +598,7 @@ export default function Home() {
                 </div>
 
                 {/* top section */}
-                <div className="absolute top-20 right-9 bg-white shadow-2xl w-sm h-[17rem]">
+                <div className="absolute top-20 right-6 bg-white shadow-2xl w-sm h-[17rem]">
                   {/* Browser Bar */}
                   <div className="h-12 flex items-center px-4 gap-2">
                     {/* Top Navigation */}
@@ -616,61 +661,13 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
-            {/* RIGHT : Project Description */}
-            <div
-              className={`space-y-6 transition-all duration-900 ease-out delay-200
-                ${
-                  secondSection.showRight
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 translate-y-20"
-                }
-              `}
-            >
-              <h3 className="text-3xl font-semibold text-stone-800 leading-tight font-serif">
-                GenAI Chatbot
-              </h3>
-
-              <p className="text-slate-600 w-[590px] font-serif font-medium leading-relaxed ">
-                We developed Link sophisticated website, integrating custom
-                JavaScript and an AI-powered generative RAG chatbot built using
-                a LangChain agent. Despite tight deadlines, we delivered a
-                seamless, high-performance experience, demonstrating strong
-                technical expertise and efficient execution.
-              </p>
-
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 font-semibold font-mono text-gray-950 hover:underline"
-              >
-                VISIT WEBSITE <span>↗</span>
-              </a>
-
-              {/* Tags */}
-              <div className="flex flex-wrap font-serif gap-3 pt-4 ">
-                {[
-                  "Attributes",
-                  "Client-First",
-                  "Figma to Webflow",
-                  "Webflow development",
-                  "GSAP Animations",
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-4 py-1.5 rounded-full bg-white border text-sm text-gray-800 shadow-sm hover:bg-gray-950 hover:text-white"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
       {/* Design and development process */}
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-5xl font-bold font-serif text-stone-800 leading-tight pb-4 text-center">
+        <h2 className="text-5xl font-bold font-serif text-[#0b5d4b] leading-tight pb-4 text-center">
           Design and Development solutions
         </h2>
         {/* development solution section */}
@@ -713,7 +710,7 @@ export default function Home() {
         <div className="mt-28 grid grid-cols-1 lg:grid-cols-2 gap-20">
           {/* LEFT SIDE */}
           <div className="relative">
-            <h2 className="text-5xl font-bold font-serif text-stone-800 leading-tight">
+            <h2 className="text-5xl font-bold font-serif text-[#0b5d4b] leading-tight">
               MY PROCESS, FROM CONCEPT TO LAUNCH
             </h2>
           </div>

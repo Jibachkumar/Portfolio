@@ -14,12 +14,12 @@ export function useInView() {
           setShowLeft(true);
         }
 
-        if (r >= 0.6 && !showRight) {
+        if (r >= 0.2 && !showRight) {
           setShowRight(true);
           observer.disconnect(); // stop observing
         }
       },
-      { threshold: [0.1, 0.6] },
+      { threshold: [0.1, 0.2] },
     );
 
     if (ref.current) observer.observe(ref.current);

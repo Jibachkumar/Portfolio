@@ -2,24 +2,16 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="bg-[#0f3f0f]">
+    <footer className="border-t border-slate-100">
       <div className="max-w-[1280px] mx-auto px-6 sm:px-10 md:px-16 py-10 text-[#d0f02a] font-serif">
         {/* Top Section */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between border-b border-[#a6c01a] pb-6">
-          <div className="flex items-center mb-6 md:mb-0">
-            <img
-              src="https://storage.googleapis.com/a1aa/image/c1c3f879-1742-4c7e-5ff2-a680d7f025f6.jpg"
-              alt="Logo of a geet tech"
-              className="w-[120px] h-[60px] object-contain"
-              width={120}
-              height={60}
-            />
-          </div>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-6">
+          <div className="flex items-center mb-6 md:mb-0"></div>
           <div className="max-w-lg leading-[18px]">
-            <p className="font-bold text-xl text-white mb-1">
+            <p className="font-bold text-xl text-black mb-1">
               The partner you’ve been looking for.
             </p>
-            <p className="text-white/95 font-mono text-xs">
+            <p className="text-black font-mono text-xs">
               We focus on website design, development, support, maintenance, and
               retainer services for world wide company. We pride ourselves on
               delivering best product and reliability. We have supported over
@@ -32,7 +24,7 @@ function Footer() {
         <div className="pt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-12 text-[13px] leading-[18px]">
           {/* Services */}
           <div>
-            <h3 className="font-semibold text-[#d0f02a] mb-4 text-[18px] leading-[22px]">
+            <h3 className="font-semibold text-black mb-4 text-[18px] leading-[22px]">
               Our services
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-2 gap-y-2 gap-x-6 text-white max-w-[280px]">
@@ -63,7 +55,7 @@ function Footer() {
 
           {/* Work */}
           <div>
-            <h3 className="font-semibold text-[#d0f02a] mb-4 text-[16px] leading-[22px]">
+            <h3 className="font-semibold text-black mb-4 text-[16px] leading-[22px]">
               Our work
             </h3>
             <ul className="text-white space-y-2 max-w-[140px]">
@@ -80,7 +72,7 @@ function Footer() {
 
           {/* About */}
           <div>
-            <h3 className="font-semibold text-[#d0f02a] mb-4 text-[16px] leading-[22px]">
+            <h3 className="font-semibold text-black mb-4 text-[16px] leading-[22px]">
               About us
             </h3>
             <ul className="text-white space-y-2 max-w-[140px]">
@@ -98,7 +90,7 @@ function Footer() {
 
           {/* Clients */}
           <div>
-            <h3 className="font-semibold text-[#d0f02a] mb-4 text-[16px] leading-[22px]">
+            <h3 className="font-semibold text-black mb-4 text-[16px] leading-[22px]">
               For clients
             </h3>
             <ul className="text-white space-y-2 max-w-[140px]">
