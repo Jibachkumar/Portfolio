@@ -214,7 +214,7 @@ export default function ProfilePage() {
                 className="h-24 w-24 rounded-lg trash perspective cursor-pointer"
               >
                 <img
-                  src="https://pngimg.com/d/facebook_logos_PNG19753.png"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZZLRluRveSbHRuuPGEc7rHQ_pEb8c_gCHCw&s"
                   alt=""
                   className="w-full h-full object-cover"
                 />

@@ -135,6 +135,12 @@ html::-webkit-scrollbar {
     0px 0px 6px rgba(10, 8, 3, 0.4);
 }
 
+.text-shadow-golden {
+  text-shadow:
+    0px 1px 0px #1f6f5f,
+    0px 0px 32px #1f6f5f;
+}
+
 @keyframes fadeInOut {
   from {
     opacity: 0;

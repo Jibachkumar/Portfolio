@@ -8,20 +8,20 @@ import ProfilePage from "./pages/Profile.jsx";
 import Home from "./pages/Home.jsx";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <ProfilePage />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
+  // {
+  //   path: "/",
+  //   element: <ProfilePage />,
+  // },
+  // {
+  //   path: "/login",
+  //   element: <Login />,
+  // },
   {
     path: "/",
     element: <App />,
     children: [
       {
-        path: "/home",
+        index: true,
         element: <Home />,
       },
     ],

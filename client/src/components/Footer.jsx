@@ -27,7 +27,7 @@ function Footer() {
             <h3 className="font-semibold text-black mb-4 text-[18px] leading-[22px]">
               Our services
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-2 gap-y-2 gap-x-6 text-white max-w-[280px]">
+            <div className="grid grid-cols-2 sm:grid-cols-2 gap-y-2 gap-x-6 text-slate-800 max-w-[280px]">
               {[
                 "React.js website design",
                 "React.js development",
@@ -58,7 +58,7 @@ function Footer() {
             <h3 className="font-semibold text-black mb-4 text-[16px] leading-[22px]">
               Our work
             </h3>
-            <ul className="text-white space-y-2 max-w-[140px]">
+            <ul className="text-slate-800 space-y-2 max-w-[140px]">
               {[
                 "Featured projects",
                 "Testimonials",
@@ -75,7 +75,7 @@ function Footer() {
             <h3 className="font-semibold text-black mb-4 text-[16px] leading-[22px]">
               About us
             </h3>
-            <ul className="text-white space-y-2 max-w-[140px]">
+            <ul className="text-slate-800 space-y-2 max-w-[140px]">
               {[
                 "Why Geek Tech",
                 "Meet the team",
@@ -93,7 +93,7 @@ function Footer() {
             <h3 className="font-semibold text-black mb-4 text-[16px] leading-[22px]">
               For clients
             </h3>
-            <ul className="text-white space-y-2 max-w-[140px]">
+            <ul className="text-slate-800 space-y-2 max-w-[140px]">
               {["Support resources", "Knowledge base", "Terms"].map(
                 (item, i) => (
                   <li key={i}>{item}</li>

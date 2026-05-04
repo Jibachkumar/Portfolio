@@ -2,6 +2,8 @@ import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AnimatedText from "../components/AminatedText";
 import { motion } from "framer-motion";
+import myImg from "../../public/myImg.png";
+
 import {
   ArrowUpRight,
   CheckCircle2,
@@ -23,38 +25,36 @@ import {
 } from "lucide-react";
 import { useInView } from "../hooks/useInView.js";
 
-import { useMotionValue, useTransform } from "framer-motion";
+import { useMotionValue, useTransform, animate } from "framer-motion";
 
 function TiltCard({ children }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // rotate based on mouse
   const rotateX = useTransform(y, [-100, 100], [15, -15]);
   const rotateY = useTransform(x, [-100, 100], [-15, 15]);
 
-  function handleMouseMove(e) {
-    const rect = e.currentTarget.getBoundingClientRect();
+  useEffect(() => {
+    const animX = animate(x, [-40, 40, -40], {
+      duration: 5,
+      repeat: Infinity,
+      ease: "easeInOut",
+    });
 
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    const animY = animate(y, [40, -40, 40], {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut",
+    });
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    x.set(mouseX - centerX);
-    y.set(mouseY - centerY);
-  }
-
-  function handleMouseLeave() {
-    x.set(0);
-    y.set(0);
-  }
+    return () => {
+      animX.stop();
+      animY.stop();
+    };
+  }, []);
 
   return (
     <motion.div
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       style={{
         rotateX,
         rotateY,
@@ -382,7 +382,7 @@ export default function Home() {
           {/* Title */}
           <h2
             ref={headingObserver.ref}
-            className={`text-6xl font-bold font-serif text-[#0b5d4b] leading-tight pb-4 text-center transform transition-all duration-700 ease-out  ${
+            className={`text-6xl font-bold font-serif text-[#0b5d4b] leading-tight pb-4 text-center transform transition-all duration-500 ease-out  ${
               headingObserver.showObserver
                 ? "opacity-100 translate-y-0 "
                 : "opacity-0 translate-y-20"
@@ -521,7 +521,7 @@ export default function Home() {
 
             {/* RIGHT : Project Description */}
             <div
-              className={`space-y-6 transition-all duration-900 ease-out delay-700
+              className={`space-y-6 transition-all duration-900 ease-out delay-200
                 ${
                   firstSection.showRight
                     ? "opacity-100 translate-x-0"
@@ -723,7 +723,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-6 pb-16">
         <h2
           ref={secondHeadingObserver.ref}
-          className={`text-5xl font-bold font-serif text-[#0b5d4b] leading-tight pb-4 text-center transform transition-all duration-700 ease-out  ${
+          className={` text-5xl font-bold font-serif text-[#0b5d4b] leading-tight pb-4 text-center transform transition-all duration-700 ease-out  ${
             secondHeadingObserver.showObserver
               ? "opacity-100 translate-y-0 "
               : "opacity-0 translate-y-20"
@@ -777,7 +777,7 @@ export default function Home() {
 
               <h2
                 ref={thirdHeadingObserver.ref}
-                className={`relative text-5xl font-bold font-serif text-[#0b5d4b] leading-tight transform transition-all duration-700 ease-out ${
+                className={`text-shadow-golden relative text-5xl font-bold font-serif text-[#0b5d4b] leading-tight transform transition-all duration-700 ease-out ${
                   thirdHeadingObserver.showObserver
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-20"
